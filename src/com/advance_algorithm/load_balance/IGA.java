@@ -10,30 +10,20 @@ public class IGA extends Environment{
     //最大迭代代数
     int max_generation = 1000;
 
-    public static void main(String[] args) {
-        Map<Integer, Integer> result = new HashMap<>();
-        for(int i=0;i<100;++i){
-            IGA iga = new IGA();
-            iga.random = new Random(i);
-            int num = iga.run();
-            if (result.containsKey(num)) result.put(num, result.get(num)+1);
-            else result.put(num,1);
-        }
-        for(Map.Entry<Integer,Integer> entry:result.entrySet()){
-            System.out.println(entry.getKey() + ": " + entry.getValue());
-        }
-    }
-
+    //算法入口
     public int run(){
         List<Chrome> pop = initPop();
         for(int i=0;i<max_generation;++i){
-            double intensity = 0.5 + (2.0 - 15) / 2.0 * 15 * max_generation;
+            //epsilon==intensity 控制交叉强度
+            double intensity = 0.5 + (2.0 - 15) / (2.0 * 15 * max_generation);
             List<Chrome> children = reproduce(pop, intensity);
+            //合并父代与子代种群
             List<Chrome> all = new ArrayList<>();
             all.addAll(pop);
             all.addAll(children);
             all.sort(Comparator.comparingInt(o -> o.fitness));
             pop.clear();
+            //二元锦标赛选择
             for (int j=0;j<population_size;++j){
                 //抽取两个不同的个体
                 int index = random.nextInt(all.size());
@@ -80,8 +70,8 @@ public class IGA extends Environment{
             List<Chrome> childPair = crossover(c1, c2, intensity);
             //变异
             if(random.nextDouble()<mut_rate){
-                c1 = mutate(c1);
-                c2 = mutate(c2);
+                c1 = mutate(childPair.get(0));
+                c2 = mutate(childPair.get(1));
             }
             children.add(c1);
             children.add(c2);

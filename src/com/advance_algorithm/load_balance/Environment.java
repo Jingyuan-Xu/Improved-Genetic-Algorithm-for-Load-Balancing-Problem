@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Environment {
     int[][] time = new int[3][15];
-    Random random = new Random();
+    public Random random = new Random();
     public Environment() {
         // init time array
         for (int i = 0; i < 15; i++) {

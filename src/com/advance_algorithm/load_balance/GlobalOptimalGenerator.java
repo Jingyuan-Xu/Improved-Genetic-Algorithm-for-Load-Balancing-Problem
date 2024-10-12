@@ -2,39 +2,19 @@ package com.advance_algorithm.load_balance;
 
 import java.util.*;
 
+/**
+ * 该类用于生成最优解，最优解用于测试算法性能
+ */
 public class GlobalOptimalGenerator extends Environment{
     static int min = Integer.MAX_VALUE;
     static List<Integer> best = null;
     public static void main(String[] args) {
-//        Stack<Pair> stack = new Stack<>();
-//        Pair start = new Pair(-1, -1);
-//        stack.push(start);
-//        List<Integer> types = new ArrayList<>();
-//        int min = Integer.MAX_VALUE;
-//        List<Integer> best = null;
-//        boolean
-//        while (!stack.isEmpty()){
-//            Pair p = stack.pop();
-//            if(p.x!=-1) types.add(p.y);
-//            if(p.x==14) {
-//                int fitness = evaluate(types);
-//                if (fitness < min){
-//                    min = fitness;
-//                    best = types;
-//                    types = new ArrayList<>(types);
-//                }
-//            }else {
-//                stack.push(new Pair(p.x+1,0));
-//                stack.push(new Pair(p.x+1,1));
-//                stack.push(new Pair(p.x+1,2));
-//            }
-//        }
         search(-1, new ArrayList<>());
         System.out.println(min);
         System.out.println(Arrays.toString(best.toArray()));
-
     }
 
+    //回溯法最优解生成器
     public static void search(int i, List<Integer> type){
         if(i==14){
             int fitness = evaluate(type);
