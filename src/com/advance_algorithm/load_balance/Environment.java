@@ -2,6 +2,7 @@ package com.advance_algorithm.load_balance;
 
 import java.util.Random;
 
+//环境中包含全局随机数对象，以及任务执行时间信息。
 public class Environment {
     int[][] time = new int[3][15];
     public Random random = new Random();

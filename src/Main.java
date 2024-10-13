@@ -3,15 +3,15 @@ import com.advance_algorithm.load_balance.IGA;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+//程序入口
 public class Main {
     public static void main(String[] args) {
         Map<Integer, Integer> result = new HashMap<>();
+        //100次独立实验
         for(int i=0;i<100;++i){
             IGA iga = new IGA();
-            iga.random = new Random(i);
+            //确定随机数种子，方便复现实验结果
+            iga.random = new Random(i*100);
             int num = iga.run();
             if (result.containsKey(num)) result.put(num, result.get(num)+1);
             else result.put(num,1);

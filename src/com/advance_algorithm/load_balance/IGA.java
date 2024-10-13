@@ -100,18 +100,16 @@ public class IGA extends Environment{
         return pair;
     }
 
+    //变异操作
     public Chrome mutate(Chrome c){
         int[] child = c.task2Ins.clone();
         int i = random.nextInt(15);
         int j = random.nextInt(15);
-//        while (i==j){
-//            j = random.nextInt(15);
-//        }
-        if(random.nextDouble()<0.5) {
+        if(random.nextDouble()<1.0/3) {
             int temp = child[i];
             child[i] = child[j];
             child[j] = temp;
-        }else {
+        }else if(random.nextDouble()<2.0/3 && random.nextDouble()>1.0/3){
             int l = Math.min(i,j);
             int r = Math.max(i,j);
             while (l<r){
@@ -121,6 +119,8 @@ public class IGA extends Environment{
                 l++;
                 r--;
             }
+        }else {
+            child[i] = random.nextInt(3);
         }
         return new Chrome(child);
     }

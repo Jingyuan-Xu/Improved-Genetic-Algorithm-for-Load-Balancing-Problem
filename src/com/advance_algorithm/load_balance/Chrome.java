@@ -1,5 +1,6 @@
 package com.advance_algorithm.load_balance;
 
+//一个染色体，或者称为种群中的一个个体
 public class Chrome extends Environment {
     public final int[] task2Ins;
     public int fitness = 0;
@@ -10,6 +11,8 @@ public class Chrome extends Environment {
         this.task2Ins = task2Ins;
         fitnessCalculate();
     }
+
+    //私有方法，所有生成的新个体必须被深拷贝，不能基于已有个体修改，所以该方法只在构造染色体时使用。
     private void fitnessCalculate(){
         int time1 = 0;
         int time2 = 0;
